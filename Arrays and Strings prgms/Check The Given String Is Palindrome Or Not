@@ -1,0 +1,36 @@
+//Check The Given String Is Palindrome Or Not
+        OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+STRING DB "MAS"
+STRING2 DB 00H,00H,00H
+COUNT EQU 0003H
+RESULT DB 00H
+DATA ENDS
+CODE SEGMENT
+        ASSUME CS:CODE,DS:DATA,ES:DATA
+        MOV AX,DATA
+        MOV DS,AX
+        MOV ES,AX
+        MOV CX,COUNT
+        LEA SI,STRING
+        LEA DI,STRING2
+        ADD SI,CX
+        DEC SI
+L1:     MOV AL,[SI]
+        MOV [DI],AL
+        DEC SI
+        INC DI
+        DEC CL
+        JNZ L1
+        LEA SI,STRING
+        LEA DI,STRING2
+L3:     CMPSB
+        JZ L2
+        JMP L4
+L2:     MOV RESULT,00H
+        DEC CL
+        JNZ L3
+L4:     HLT
+CODE ENDS
+END

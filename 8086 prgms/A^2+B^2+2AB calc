@@ -1,0 +1,30 @@
+//A^2+B^2+2AB calc for 6 bit number
+        OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+A DB 02H
+B DB 01H
+RES DW 0000H
+CARRY DB 00H
+DATA ENDS
+CODE SEGMENT
+        ASSUME CS:CODE,DS:DATA
+        MOV AX,DATA
+        MOV DS,AX
+        MOV CL,00H
+        MOV AL,A
+        MUL AL
+        MOV BX,AX
+        MOV AL,B
+        MUL AL
+        ADD BX,AX
+        MOV AL,A
+        MUL B
+        ADD AX,AX
+        ADC BX,AX
+        JNC L1
+        INC CL
+L1:     MOV RES,AX
+        MOV CARRY,CL
+CODE ENDS
+END
